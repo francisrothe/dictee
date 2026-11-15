@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dictée Practice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+
+    <!-- ================= HOME ================= -->
+    <section id="home" class="screen">
+      <header class="hero">
+        <div class="hero-badge" aria-hidden="true">✏️</div>
+        <h1 id="app-title"></h1>
+        <p id="app-subtitle" class="subtitle"></p>
+      </header>
+
+      <button id="btn-parent" class="btn btn-white" type="button">
+        <span class="btn-icon" aria-hidden="true">📝</span>
+        <span class="btn-text"></span>
+      </button>
+      <p id="current-week" class="current-week"></p>
+
+      <p id="label-practice" class="section-label"></p>
+      <nav class="menu">
+        <button id="btn-memorize" class="btn btn-green" type="button">
+          <span class="btn-icon" aria-hidden="true">🧠</span>
+          <span class="btn-text"></span>
+        </button>
+        <button id="btn-gaps" class="btn btn-blue" type="button">
+          <span class="btn-icon" aria-hidden="true">🧩</span>
+          <span class="btn-text"></span>
+        </button>
+        <button id="btn-spot" class="btn btn-orange" type="button">
+          <span class="btn-icon" aria-hidden="true">🔍</span>
+          <span class="btn-text"></span>
+        </button>
+      </nav>
+
+      <p id="label-test" class="section-label"></p>
+      <button id="btn-dictee" class="btn btn-purple btn-dictee" type="button">
+        <span class="btn-icon" aria-hidden="true">🧑‍🏫</span>
+        <span class="btn-text"></span>
+      </button>
+
+      <p id="home-message" class="message" role="status" aria-live="polite"></p>
+
+      <div class="home-footer">
+        <button id="btn-voice" class="link-btn link-muted" type="button"></button>
+      </div>
+    </section>
+
+    <!-- ================= VOICE SETTINGS ================= -->
+    <section id="voice" class="screen" hidden>
+      <div class="topbar">
+        <button id="voice-back" class="link-btn" type="button"></button>
+      </div>
+      <h2 id="voice-heading" class="screen-title"></h2>
+      <p id="voice-instruction" class="instruction"></p>
+
+      <select id="voice-select" class="big-input big-select"></select>
+
+      <p id="voice-message" class="message" role="status" aria-live="polite"></p>
+
+      <div class="actions">
+        <button id="voice-test" class="btn btn-blue btn-center" type="button"></button>
+      </div>
+    </section>
+
+    <!-- ================= PARENT: ONE SENTENCE ================= -->
+    <section id="editor" class="screen" hidden>
+      <div class="topbar">
+        <button id="editor-back" class="link-btn" type="button"></button>
+        <button id="editor-cancel" class="link-btn link-muted" type="button"></button>
+      </div>
+
+      <div class="progress" aria-hidden="true"><div id="editor-progress" class="progress-fill"></div></div>
+
+      <h2 id="editor-heading" class="screen-title"></h2>
+      <p id="editor-instruction" class="instruction"></p>
+
+      <div class="field">
+        <label for="field-correct" id="label-correct" class="label label-correct"></label>
+        <input id="field-correct" class="big-input" type="text"
+               spellcheck="false" autocorrect="off" autocapitalize="off" autocomplete="off" lang="fr">
+      </div>
+      <div class="field">
+        <label for="field-wrong1" id="label-wrong1" class="label label-wrong"></label>
+        <input id="field-wrong1" class="big-input" type="text"
+               spellcheck="false" autocorrect="off" autocapitalize="off" autocomplete="off" lang="fr">
+      </div>
+      <div class="field">
+        <label for="field-wrong2" id="label-wrong2" class="label label-wrong"></label>
+        <input id="field-wrong2" class="big-input" type="text"
+               spellcheck="false" autocorrect="off" autocapitalize="off" autocomplete="off" lang="fr">
+      </div>
+
+      <p id="editor-message" class="message" role="alert" aria-live="assertive"></p>
+
+      <div class="actions">
+        <button id="btn-next" class="btn btn-green btn-center" type="button"></button>
+        <button id="btn-done" class="btn btn-white btn-center" type="button"></button>
+        <button id="btn-finish" class="btn btn-green btn-center" type="button"></button>
+      </div>
+    </section>
+
+    <!-- ================= PARENT: SUMMARY ================= -->
+    <section id="summary" class="screen" hidden>
+      <h2 id="summary-heading" class="screen-title"></h2>
+      <p id="summary-intro" class="instruction"></p>
+
+      <ol id="summary-list" class="summary-list"></ol>
+
+      <p id="summary-message" class="message" role="alert" aria-live="assertive"></p>
+
+      <div class="actions">
+        <button id="btn-save" class="btn btn-green btn-center" type="button"></button>
+        <button id="btn-summary-back" class="btn btn-white btn-center" type="button"></button>
+      </div>
+    </section>
+
+    <!-- ================= GAME 1: MEMORIZE & WRITE ================= -->
+    <section id="memorize" class="screen" hidden>
+      <div class="topbar">
+        <button id="mem-quit" class="link-btn link-muted" type="button"></button>
+        <span id="mem-counter" class="counter"></span>
+      </div>
+
+      <div class="progress" aria-hidden="true"><div id="mem-progress" class="progress-fill"></div></div>
+
+      <!-- Phase 1: look at the sentence -->
+      <div id="mem-phase-look">
+        <p id="mem-look-instruction" class="instruction"></p>
+        <div id="mem-sentence" class="sentence-card" lang="fr"></div>
+        <div class="actions">
+          <button id="mem-go" class="btn btn-green btn-center" type="button"></button>
+        </div>
+      </div>
+
+      <!-- Phase 2: write it from memory -->
+      <div id="mem-phase-write" hidden>
+        <p id="mem-write-instruction" class="instruction"></p>
+        <textarea id="mem-input" class="big-input big-textarea" rows="3"
+                  spellcheck="false" autocorrect="off" autocapitalize="off" autocomplete="off" lang="fr"></textarea>
+        <p id="mem-write-message" class="message" role="alert" aria-live="assertive"></p>
+        <div class="actions">
+          <button id="mem-check" class="btn btn-green btn-center" type="button"></button>
+        </div>
+      </div>
+
+      <!-- Phase 3: see the mistakes -->
+      <div id="mem-phase-result" hidden>
+        <p id="mem-feedback" class="feedback" role="status" aria-live="polite"></p>
+        <div id="mem-yours-block">
+          <p id="mem-yours-label" class="label label-wrong"></p>
+          <div id="mem-yours" class="diff-box" lang="fr"></div>
+        </div>
+        <p id="mem-correct-label" class="label label-correct"></p>
+        <div id="mem-correct" class="diff-box" lang="fr"></div>
+        <div class="actions">
+          <button id="mem-next" class="btn btn-green btn-center" type="button"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= GAME 2: FILL THE GAPS ================= -->
+    <section id="gaps" class="screen" hidden>
+      <div class="topbar">
+        <button id="gap-quit" class="link-btn link-muted" type="button"></button>
+        <span id="gap-counter" class="counter"></span>
+      </div>
+
+      <div class="progress" aria-hidden="true"><div id="gap-progress" class="progress-fill"></div></div>
+
+      <p id="gap-instruction" class="instruction"></p>
+
+      <div id="gap-listen-row" class="listen-row">
+        <button id="gap-listen" class="btn btn-blue btn-small" type="button"></button>
+        <button id="gap-listen-slow" class="btn btn-white btn-small" type="button"></button>
+      </div>
+
+      <div id="gap-sentence" class="sentence-card gap-sentence" lang="fr"></div>
+
+      <p id="gap-message" class="message" role="alert" aria-live="assertive"></p>
+
+      <div id="gap-result" hidden>
+        <p id="gap-feedback" class="feedback" role="status" aria-live="polite"></p>
+        <div id="gap-diff" hidden>
+          <p id="gap-yours-label" class="label label-wrong"></p>
+          <div id="gap-yours" class="diff-box" lang="fr"></div>
+          <p id="gap-correct-label" class="label label-correct"></p>
+          <div id="gap-correct" class="diff-box" lang="fr"></div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="gap-check" class="btn btn-green btn-center" type="button"></button>
+        <button id="gap-next" class="btn btn-green btn-center" type="button" hidden></button>
+      </div>
+    </section>
+
+    <!-- ================= GAME 3: SPOT THE RIGHT SENTENCE ================= -->
+    <section id="spot" class="screen" hidden>
+      <div class="topbar">
+        <button id="spot-quit" class="link-btn link-muted" type="button"></button>
+        <span id="spot-counter" class="counter"></span>
+      </div>
+
+      <div class="progress" aria-hidden="true"><div id="spot-progress" class="progress-fill"></div></div>
+
+      <p id="spot-instruction" class="instruction"></p>
+
+      <div id="spot-options" class="options"></div>
+
+      <p id="spot-feedback" class="feedback" role="status" aria-live="polite" hidden></p>
+
+      <div class="actions">
+        <button id="spot-next" class="btn btn-green btn-center" type="button" hidden></button>
+      </div>
+    </section>
+
+    <!-- ================= DICTÉE ================= -->
+    <section id="dictee" class="screen" hidden>
+      <div class="topbar">
+        <button id="dictee-quit" class="link-btn link-muted" type="button"></button>
+        <span id="dictee-counter" class="counter"></span>
+      </div>
+
+      <div class="progress progress-purple" aria-hidden="true"><div id="dictee-progress" class="progress-fill"></div></div>
+
+      <div class="teacher-area">
+        <button id="dictee-teacher" class="teacher" type="button">
+          <span aria-hidden="true">🧑‍🏫</span>
+        </button>
+        <p id="dictee-instruction" class="instruction teacher-hint"></p>
+        <button id="dictee-slow" class="btn btn-white btn-small btn-inline" type="button"></button>
+      </div>
+
+      <textarea id="dictee-input" class="big-input big-textarea" rows="3"
+                spellcheck="false" autocorrect="off" autocapitalize="off" autocomplete="off" lang="fr"></textarea>
+      <p id="dictee-message" class="message" role="alert" aria-live="assertive"></p>
+
+      <div class="actions">
+        <button id="dictee-next" class="btn btn-purple btn-center" type="button"></button>
+      </div>
+    </section>
+
+    <!-- ================= DICTÉE: CORRECTION ================= -->
+    <section id="dictee-results" class="screen" hidden>
+      <div class="end-screen">
+        <div id="dr-emoji" class="end-emoji" aria-hidden="true"></div>
+        <h2 id="dr-title" class="screen-title"></h2>
+        <p id="dr-score" class="instruction"></p>
+      </div>
+
+      <ol id="dr-list" class="summary-list"></ol>
+
+      <div class="actions">
+        <button id="dr-again" class="btn btn-purple btn-center" type="button"></button>
+        <button id="dr-home" class="btn btn-white btn-center" type="button"></button>
+      </div>
+    </section>
+
+    <!-- ================= END OF A GAME (shared) ================= -->
+    <section id="game-end" class="screen end-screen" hidden>
+      <div id="end-emoji" class="end-emoji" aria-hidden="true"></div>
+      <h2 id="end-title" class="screen-title"></h2>
+      <p id="end-score" class="instruction"></p>
+      <div class="actions">
+        <button id="end-again" class="btn btn-green btn-center" type="button"></button>
+        <button id="end-home" class="btn btn-white btn-center" type="button"></button>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
