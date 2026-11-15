@@ -4,12 +4,14 @@
 var TEXT = {
   appTitle: "Dictée Practice",
   appSubtitle: "Practise this week's sentences!",
-  currentWeek: "Current week: {label} · {n} sentences",
+  currentWeek: "Current week",
+  sentenceCount: "{n} sentences",
   menu: {
     practice: "Practice",
     test: "Test yourself",
     dictee: "Dictée!",
-    parent: "Enter this week's sentences",
+    see: "See sentences",
+    parent: "Add your own sentences instead",
     memorize: "Memorize & Write",
     gaps: "Fill the Gaps",
     spot: "Spot the Right Sentence"
@@ -149,19 +151,18 @@ var TEXT = {
    ========================================================== */
 var EXAMPLE_WEEK = {
   id: "example",
-  label: "Example week",
+  label: "Dictée 5",
   createdAt: null,
   sentences: [
-    { text: "Le chat dort sur le canapé.", wrong1: "Le chat dort sur le canape.", wrong2: "Le chat dors sur le canapé." },
-    { text: "Ma sœur aime les fraises.", wrong1: "Ma soeur aime les fraises.", wrong2: "Ma sœur aime les fraise." },
-    { text: "Nous allons à l'école à pied.", wrong1: "Nous allons a l'école à pied.", wrong2: "Nous allons à l'école à pieds." },
-    { text: "Il fait beau aujourd'hui.", wrong1: "Il fait bo aujourd'hui.", wrong2: "Il fais beau aujourd'hui." },
-    { text: "Mon père lit un livre.", wrong1: "Mon pere lit un livre.", wrong2: "Mon père lis un livre." },
-    { text: "Les enfants jouent dans le jardin.", wrong1: "Les enfants joue dans le jardin.", wrong2: "Les enfant jouent dans le jardin." },
-    { text: "J'ai un petit chien noir.", wrong1: "J'ai un petit chien noire.", wrong2: "J'ai un petit chient noir." },
-    { text: "La maison est très grande.", wrong1: "La maison est tres grande.", wrong2: "La maison et très grande." },
-    { text: "Elle boit un verre de lait.", wrong1: "Elle boie un verre de lait.", wrong2: "Elle boit un vert de lait." },
-    { text: "Le soleil brille dans le ciel.", wrong1: "Le soleil brile dans le ciel.", wrong2: "Le soleil brille dans le ciels." }
+    { text: "Je joue à l'herboriste", wrong1: "Je jou à l'herboriste", wrong2: "Je joue à l'erboriste"  },
+    { text: "Je compare les plantes, les fleurs, les herbes et les arbres", wrong1: "Je compare le plantes, le fleurs, le herbes et le arbres", wrong2: "Je compare les plante, les fleur, les herbe et les arbre" },
+    { text: "C'est qui? C'est votre fils?", wrong1: "C'et qui? C'et votre fils?", wrong2: "C'est ci? C'est votre fil?" },
+    { text: "Oui, c'est lui", wrong1: "Ui, c'est lui", wrong2: "Oui, ce lui" },
+    { text: "C'est qui le monsieur?", wrong1: "C'est qui le monsiur?", wrong2: "Ce qui le monsieur?" },
+    { text: "Claude Monet est un artiste-peintre a français”", wrong1: "Claude Monet et un artiste-peintre a français”", wrong2: "Claude Monet est un artiste-paintre a francais”" },
+    { text: "C'est le jardinier qui jardine dans le jardin", wrong1: "C'est le jardinier qui jardin dans le jardine", wrong2: "C'est le gardinier qui gardine dans le gardin" },
+    { text: "Il est mort en mille neuf cent vingt-six", wrong1: "Il est mort en mille neuf cent vente-six", wrong2: "Il et mort en mille neuf cent vingt-six" },
+
   ]
 };
 
@@ -252,7 +253,7 @@ function showMessage(id, msg, kind) {
 
 function showScreen(id) {
   stopSpeaking();
-  ["home", "editor", "summary", "memorize", "gaps", "spot", "dictee", "dictee-results", "game-end", "voice"].forEach(function (s) {
+  ["home", "sentences", "editor", "summary", "memorize", "gaps", "spot", "dictee", "dictee-results", "game-end", "voice"].forEach(function (s) {
     $(s).hidden = s !== id;
   });
   window.scrollTo(0, 0);
@@ -276,9 +277,26 @@ function formatWeekLabel(date) {
    ========================================================== */
 function renderHome(message, kind) {
   var week = getCurrentWeek();
-  setText("current-week", fill(TEXT.currentWeek, { label: week.label, n: week.sentences.length }));
+  setText("week-name", week.label);
+  setText("week-count", fill(TEXT.sentenceCount, { n: week.sentences.length }));
   showMessage("home-message", message || "", kind);
   showScreen("home");
+}
+
+/* ==========================================================
+   SEE SENTENCES — the correct sentences of the current week
+   ========================================================== */
+function showSentences() {
+  var week = getCurrentWeek();
+  setText("sentences-heading", week.label);
+  var list = $("sentences-list");
+  list.innerHTML = "";
+  week.sentences.forEach(function (s) {
+    var li = document.createElement("li");
+    li.textContent = s.text;
+    list.appendChild(li);
+  });
+  showScreen("sentences");
 }
 
 /* ==========================================================
@@ -1266,7 +1284,12 @@ function applyStaticText() {
   setText("app-title", TEXT.appTitle);
   setText("app-subtitle", TEXT.appSubtitle);
 
+  setText("week-kicker", TEXT.currentWeek);
+  setButtonText("btn-see", TEXT.menu.see);
   setButtonText("btn-parent", TEXT.menu.parent);
+  setText("sentences-back", TEXT.voice.back);
+  setText("sentences-kicker", TEXT.currentWeek);
+  setButtonText("sentences-add", TEXT.menu.parent);
   setButtonText("btn-memorize", TEXT.menu.memorize);
   setButtonText("btn-gaps", TEXT.menu.gaps);
   setButtonText("btn-spot", TEXT.menu.spot);
@@ -1333,6 +1356,9 @@ function bindEvents() {
 
   // Home
   $("btn-parent").addEventListener("click", startEditor);
+  $("btn-see").addEventListener("click", showSentences);
+  $("sentences-back").addEventListener("click", function () { renderHome(); });
+  $("sentences-add").addEventListener("click", startEditor);
   $("btn-memorize").addEventListener("click", startMemorize);
   $("btn-gaps").addEventListener("click", startGaps);
   $("btn-spot").addEventListener("click", startSpot);

@@ -20,11 +20,21 @@
         <p id="app-subtitle" class="subtitle"></p>
       </header>
 
-      <button id="btn-parent" class="btn btn-white" type="button">
-        <span class="btn-icon" aria-hidden="true">📝</span>
-        <span class="btn-text"></span>
-      </button>
-      <p id="current-week" class="current-week"></p>
+      <div class="week-card">
+        <p id="week-kicker" class="week-kicker"></p>
+        <p id="week-name" class="week-name"></p>
+        <p id="week-count" class="week-count"></p>
+        <div class="week-actions">
+          <button id="btn-see" class="btn btn-blue btn-small" type="button">
+            <span class="btn-icon" aria-hidden="true">👀</span>
+            <span class="btn-text"></span>
+          </button>
+          <button id="btn-parent" class="btn btn-white btn-small" type="button">
+            <span class="btn-icon" aria-hidden="true">📝</span>
+            <span class="btn-text"></span>
+          </button>
+        </div>
+      </div>
 
       <p id="label-practice" class="section-label"></p>
       <nav class="menu">
@@ -52,6 +62,24 @@
 
       <div class="home-footer">
         <button id="btn-voice" class="link-btn link-muted" type="button"></button>
+      </div>
+    </section>
+
+    <!-- ================= SEE SENTENCES ================= -->
+    <section id="sentences" class="screen" hidden>
+      <div class="topbar">
+        <button id="sentences-back" class="link-btn" type="button"></button>
+      </div>
+      <p id="sentences-kicker" class="week-kicker"></p>
+      <h2 id="sentences-heading" class="screen-title"></h2>
+
+      <ol id="sentences-list" class="sentence-list" lang="fr"></ol>
+
+      <div class="actions">
+        <button id="sentences-add" class="btn btn-white btn-center" type="button">
+          <span class="btn-icon" aria-hidden="true">📝</span>
+          <span class="btn-text"></span>
+        </button>
       </div>
     </section>
 

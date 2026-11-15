@@ -523,6 +523,88 @@ h1 {
   opacity: 0.55;
 }
 
+/* ---------- Current week card ---------- */
+.week-card {
+  margin-bottom: 32px;
+  padding: 22px 20px 20px;
+  text-align: center;
+  background: #ddf4ff;
+  border: 2px solid #84d8ff;
+  border-bottom-width: 5px;
+  border-radius: 20px;
+}
+
+.week-kicker {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--blue-dark);
+}
+
+.week-name {
+  margin: 4px 0 2px;
+  font-size: 2.3rem;
+  font-weight: 900;
+  line-height: 1.15;
+  color: var(--text);
+  word-break: break-word;
+}
+
+.week-count {
+  margin: 0 0 18px;
+  font-size: 1.05rem;
+  color: var(--text-light);
+}
+
+.week-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.week-actions .btn {
+  flex: 1 1 200px;
+}
+
+/* ---------- See sentences ---------- */
+#sentences .week-kicker {
+  text-align: left;
+}
+
+.sentence-list {
+  margin: 12px 0 8px;
+  padding: 0;
+  list-style: none;
+  counter-reset: sentence;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.sentence-list li {
+  counter-increment: sentence;
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+  padding: 14px 18px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  line-height: 1.4;
+  word-break: break-word;
+  background: #fff;
+  border: 2px solid var(--border);
+  border-bottom-width: 4px;
+  border-radius: var(--radius);
+}
+.sentence-list li::before {
+  content: counter(sentence);
+  flex: none;
+  min-width: 1.6em;
+  font-size: 1rem;
+  font-weight: 900;
+  color: var(--blue);
+}
+
 /* ---------- Home sections ---------- */
 .section-label {
   margin: 0 0 10px;
