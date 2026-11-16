@@ -159,7 +159,7 @@ var EXAMPLE_WEEK = {
     { text: "C'est qui? C'est votre fils?", wrong1: "C'et qui? C'et votre fils?", wrong2: "C'est ci? C'est votre fil?" },
     { text: "Oui, c'est lui", wrong1: "Ui, c'est lui", wrong2: "Oui, ce lui" },
     { text: "C'est qui le monsieur?", wrong1: "C'est qui le monsiur?", wrong2: "Ce qui le monsieur?" },
-    { text: "Claude Monet est un artiste-peintre a français”", wrong1: "Claude Monet et un artiste-peintre a français”", wrong2: "Claude Monet est un artiste-paintre a francais”" },
+    { text: "Claude Monet est un artiste-peintre français", wrong1: "Claude Monet et un artiste-peintre français", wrong2: "Claude Monet est un artiste-paintre francais" },
     { text: "C'est le jardinier qui jardine dans le jardin", wrong1: "C'est le jardinier qui jardin dans le jardine", wrong2: "C'est le gardinier qui gardine dans le gardin" },
     { text: "Il est mort en mille neuf cent vingt-six", wrong1: "Il est mort en mille neuf cent vente-six", wrong2: "Il et mort en mille neuf cent vingt-six" },
 
