@@ -151,17 +151,18 @@ var TEXT = {
    ========================================================== */
 var EXAMPLE_WEEK = {
   id: "example",
-  label: "Dictée 5",
+  label: "Dictée 6",
   createdAt: null,
   sentences: [
-    { text: "Je joue à l'herboriste", wrong1: "Je jou à l'herboriste", wrong2: "Je joue à l'erboriste"  },
-    { text: "Je compare les plantes, les fleurs, les herbes et les arbres", wrong1: "Je compare le plantes, le fleurs, le herbes et le arbres", wrong2: "Je compare les plante, les fleur, les herbe et les arbre" },
-    { text: "C'est qui? C'est votre fils?", wrong1: "C'et qui? C'et votre fils?", wrong2: "C'est ci? C'est votre fil?" },
-    { text: "Oui, c'est lui", wrong1: "Ui, c'est lui", wrong2: "Oui, ce lui" },
-    { text: "C'est qui le monsieur?", wrong1: "C'est qui le monsiur?", wrong2: "Ce qui le monsieur?" },
-    { text: "Claude Monet est un artiste-peintre français", wrong1: "Claude Monet et un artiste-peintre français", wrong2: "Claude Monet est un artiste-paintre francais" },
-    { text: "C'est le jardinier qui jardine dans le jardin", wrong1: "C'est le jardinier qui jardin dans le jardine", wrong2: "C'est le gardinier qui gardine dans le gardin" },
-    { text: "Il est mort en mille neuf cent vingt-six", wrong1: "Il est mort en mille neuf cent vente-six", wrong2: "Il et mort en mille neuf cent vingt-six" },
+    { text: "Nous visitons le musée", wrong1: "Nou visitons le musée", wrong2: "Nous visiton le musée"  },
+    { text: "Ils visitent la maison et le jardin du peintre", wrong1: "Ils visit la maison et le jardin du peintre", wrong2: "Il visitent la meson et le jardin du peintre" },
+    { text: "Ils parlent de leurs loisirs", wrong1: "Ils parlont de leurs loisirs", wrong2: "Il parlent de leur loisirs" },
+    { text: "Nous parlons de nos peintres préférés", wrong1: "Nous parlons de no peintre préféré", wrong2: "Nous parlent de nos peintres préférés" },
+    { text: "Nous nous promenons au centre-ville", wrong1: "Nou nou promenon au centre-ville", wrong2: "Nous nous promenon o centre-ville" },
+    { text: "Elles se promènent dans les bois", wrong1: "Elles se promènon dan les bois", wrong2: "Elles se pokemon dans le boi" },
+    { text: "C'est mon peintre préféré", wrong1: "C'est mon paintre préféré", wrong2: "C'est mon peintre prefere" },
+    { text: "C'est un peintre. Il est né en mille huit cent quarante", wrong1: "C'est un peintre. Il et nee en mil huit cent quarante", wrong2: "C'est un peintre. Il est né en mille uit cent qarant" },
+    { text: "Qui est-ce?", wrong1: "Ci est-ce?", wrong2: "Qui esce?" },
 
   ]
 };
