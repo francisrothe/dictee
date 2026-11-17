@@ -154,7 +154,7 @@ var TEXT = {
    ========================================================== */
 var EXAMPLE_WEEK = {
   id: "example",
-  label: "Dictée 5",
+  label: "Dictée 6",
   createdAt: null,
   sentences: [
     { text: "Nous visitons le musée", wrong1: "Nou visitons le musée", wrong2: "Nous visiton le musée"  },
