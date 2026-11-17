@@ -11,6 +11,9 @@ var TEXT = {
     test: "Test yourself",
     dictee: "Dictée!",
     see: "See sentences",
+    builtin: "Back to {label}",
+    builtinDone: "Back to {label}! 👍",
+    builtinFailed: "Switched to {label}, but this device couldn't remember it. It will go back to your own sentences when the page reloads.",
     parent: "Add your own sentences instead",
     memorize: "Memorize & Write",
     gaps: "Fill the Gaps",
@@ -151,7 +154,7 @@ var TEXT = {
    ========================================================== */
 var EXAMPLE_WEEK = {
   id: "example",
-  label: "Dictée 6",
+  label: "Dictée 5",
   createdAt: null,
   sentences: [
     { text: "Nous visitons le musée", wrong1: "Nou visitons le musée", wrong2: "Nous visiton le musée"  },
@@ -163,7 +166,6 @@ var EXAMPLE_WEEK = {
     { text: "C'est mon peintre préféré", wrong1: "C'est mon paintre préféré", wrong2: "C'est mon peintre prefere" },
     { text: "C'est un peintre. Il est né en mille huit cent quarante", wrong1: "C'est un peintre. Il et nee en mil huit cent quarante", wrong2: "C'est un peintre. Il est né en mille uit cent qarant" },
     { text: "Qui est-ce?", wrong1: "Ci est-ce?", wrong2: "Qui esce?" },
-
   ]
 };
 
@@ -278,10 +280,28 @@ function formatWeekLabel(date) {
    ========================================================== */
 function renderHome(message, kind) {
   var week = getCurrentWeek();
+  var isOwn = week !== EXAMPLE_WEEK;
   setText("week-name", week.label);
   setText("week-count", fill(TEXT.sentenceCount, { n: week.sentences.length }));
+
+  // With the parent's own sentences, offer a way back to the built-in week
+  // in place of "See sentences".
+  $("btn-see").hidden = isOwn;
+  $("btn-builtin").hidden = !isOwn;
+  setButtonText("btn-builtin", fill(TEXT.menu.builtin, { label: EXAMPLE_WEEK.label }));
+
   showMessage("home-message", message || "", kind);
   showScreen("home");
+}
+
+// Switch back to the week written in the code. Saved weeks stay in storage.
+function useBuiltinWeek() {
+  state.data.currentWeekId = null;
+  var ok = saveData(state.data);
+  renderHome(
+    fill(ok ? TEXT.menu.builtinDone : TEXT.menu.builtinFailed, { label: EXAMPLE_WEEK.label }),
+    ok ? "success" : "error"
+  );
 }
 
 /* ==========================================================
@@ -1358,6 +1378,7 @@ function bindEvents() {
   // Home
   $("btn-parent").addEventListener("click", startEditor);
   $("btn-see").addEventListener("click", showSentences);
+  $("btn-builtin").addEventListener("click", useBuiltinWeek);
   $("sentences-back").addEventListener("click", function () { renderHome(); });
   $("sentences-add").addEventListener("click", startEditor);
   $("btn-memorize").addEventListener("click", startMemorize);

@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
   <main class="app">
@@ -27,6 +27,10 @@
         <div class="week-actions">
           <button id="btn-see" class="btn btn-blue btn-small" type="button">
             <span class="btn-icon" aria-hidden="true">👀</span>
+            <span class="btn-text"></span>
+          </button>
+          <button id="btn-builtin" class="btn btn-blue btn-small" type="button" hidden>
+            <span class="btn-icon" aria-hidden="true">↩️</span>
             <span class="btn-text"></span>
           </button>
           <button id="btn-parent" class="btn btn-white btn-small" type="button">
@@ -307,6 +311,6 @@
 
   </main>
 
-  <script src="app.js"></script>
+  <script src="app.js?v=3"></script>
 </body>
 </html>
